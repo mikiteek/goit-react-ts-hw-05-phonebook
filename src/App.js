@@ -58,7 +58,13 @@ class App extends Component {
     this.setState(({contacts}) => ({
       contacts: [...contacts, contactNew],
     }));
+    this.clearInputContactData();
   };
+
+  clearInputContactData = () => {
+    const inputRefs = document.querySelectorAll(".js-form-input");
+    inputRefs.forEach(inputItem => inputItem.value = "");
+  }
   deleteContact = idContact => {
     this.setState(({contacts}) => ({
       contacts: contacts.filter(({id}) => id !== idContact),

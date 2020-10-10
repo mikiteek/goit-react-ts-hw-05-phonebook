@@ -18,6 +18,7 @@ class ContactForm extends Component {
     const {name, number} = this.state;
 
     this.props.onSubmit({name, number});
+    this.setState({name: "", number: ""});
   }
   handleChange = event => {
     const {name, value} = event.target;
@@ -25,7 +26,7 @@ class ContactForm extends Component {
   }
 
   render() {
-    const inputStyles = [styles.formElement, styles.formInput].join(" ");
+    const inputStyles = [styles.formElement, styles.formInput, "js-form-input"].join(" ");
     return (
       <section className={styles.sectionContacts}>
         <CSSTransition in={true} appear={true} timeout={500} classNames="ContactFormTitle" unmountOnExit>
