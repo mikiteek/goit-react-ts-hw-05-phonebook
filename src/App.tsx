@@ -9,7 +9,19 @@ import Filter from "./components/Filter/Filter";
 import ContactNotifyExist from "./components/ContactNotifyExist/ContactNotifyExist";
 import "./AppAnimation.css";
 
-class App extends Component {
+interface contactTypes {
+  id: string,
+  name: string,
+  number: string,
+}
+
+interface stateTypes {
+  contacts: contactTypes[],
+  filter: string,
+  notify: boolean,
+}
+
+class App extends Component<{}, stateTypes> {
   state = {
     contacts: [
       {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
@@ -21,7 +33,7 @@ class App extends Component {
     notify: false,
   };
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps: any, prevState: stateTypes) {
     const {contacts, notify} = this.state;
     if (prevState.contacts !== contacts) {
       localStorage.setItem("contacts", JSON.stringify(contacts));
@@ -37,11 +49,11 @@ class App extends Component {
     }
   }
 
-  hiddenNotify = () => {
+  private hiddenNotify = (): void => {
     this.setState({notify: false});
   }
 
-  addContact = ({name, number}) => {
+  private addContact = ({name, number}: contactTypes): void => {
     const {contacts} = this.state;
 
     if (name === "" || number === "")
@@ -51,7 +63,7 @@ class App extends Component {
       this.clearInputContactData();
       return;
     }
-    const contactNew = {
+    const contactNew: contactTypes = {
       id: uuid(),
       name,
       number,
@@ -62,20 +74,20 @@ class App extends Component {
     this.clearInputContactData();
   };
 
-  clearInputContactData = () => {
+  private clearInputContactData = (): void => {
     const inputRefs = document.querySelectorAll(".js-form-input");
-    inputRefs.forEach(inputItem => inputItem.value = "");
+    inputRefs.forEach((inputItem: any) => inputItem.value = "");
   }
-  deleteContact = idContact => {
+  private deleteContact = (idContact: string): void => {
     this.setState(({contacts}) => ({
       contacts: contacts.filter(({id}) => id !== idContact),
     }));
   }
-  getVisibleContacts = () => {
+  private getVisibleContacts = (): contactTypes[] => {
     const {filter, contacts} = this.state;
     return contacts.filter(({name}) => name.toLowerCase().includes(filter.toLowerCase()));
   }
-  changeFilter = event => {
+  changeFilter = (event: any) => {
     this.setState({filter: event.target.value});
   }
 

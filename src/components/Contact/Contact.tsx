@@ -9,7 +9,7 @@ interface propTypes {
 }
 
 class Contact extends Component<propTypes> {
-  private handleDeleteContact = () => {
+  private handleDeleteContact = (): void => {
     const {onClick, id} = this.props;
     onClick(id);
   }
