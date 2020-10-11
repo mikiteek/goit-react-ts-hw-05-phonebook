@@ -1,28 +1,33 @@
 import React, {Component} from "react";
-import PropTypes from "prop-types";
 import {CSSTransition} from "react-transition-group";
 import styles from "./ContactForm.module.scss";
 import "./ContactFormAnimation.css";
 
+interface propTypes {
+  onSubmit: any,
+}
 
-class ContactForm extends Component {
+interface stateTypes {
+  name: string,
+  number: string,
+}
+
+class ContactForm extends Component<propTypes, stateTypes> {
   state = {
     name: "",
     number: "",
   }
-  static propTypes = {
-    onSubmit: PropTypes.func.isRequired,
-  }
-  handleSubmit = event => {
+
+  private handleSubmit = (event: any): void => {
     event.preventDefault();
     const {name, number} = this.state;
 
     this.props.onSubmit({name, number});
     this.setState({name: "", number: ""});
   }
-  handleChange = event => {
-    const {name, value} = event.target;
-    this.setState({[name]: value});
+  private handleChange = (event: any): void => {
+    const {name, value}:{name: string, value: string} = event.target;
+    this.setState({[name]: value} as any);
   }
 
   render() {

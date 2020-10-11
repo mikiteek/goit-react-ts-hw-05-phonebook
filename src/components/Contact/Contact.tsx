@@ -1,17 +1,15 @@
 import React, {Component} from "react";
-import PropTypes from "prop-types";
 import styles from "./Contact.module.scss";
 
+interface propTypes {
+  name: string,
+  number: string,
+  id: string,
+  onClick: any,
+}
 
-class Contact extends Component {
-  static propTypes = {
-    name: PropTypes.string.isRequired,
-    number: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-    onClick: PropTypes.func,
-  }
-
-  handleDeleteContact = () => {
+class Contact extends Component<propTypes> {
+  private handleDeleteContact = () => {
     const {onClick, id} = this.props;
     onClick(id);
   }

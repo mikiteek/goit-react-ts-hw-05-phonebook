@@ -1,11 +1,11 @@
 import React, {Component} from "react";
-import PropTypes from "prop-types";
 import styles from "./Layout.module.scss";
 
-class Layout extends Component {
-  static propTypes = {
-    children: PropTypes.node,
-  }
+interface propTypes {
+  children: any,
+}
+
+class Layout extends Component<propTypes> {
   render() {
     return (
       <div className={styles.wrapper}>
