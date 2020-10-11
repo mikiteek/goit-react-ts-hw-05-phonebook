@@ -1,12 +1,12 @@
 import React, {Component} from "react";
-import PropTypes from "prop-types";
 import styles from "./SectionContacts.module.scss";
 
-class SectionContacts extends Component {
-  static propTypes = {
-    title: PropTypes.string,
-    children: PropTypes.node,
-  }
+interface propTypes {
+  title: string,
+  children: any,
+}
+
+class SectionContacts extends Component<propTypes> {
   render() {
     const {title, children} = this.props;
     return (

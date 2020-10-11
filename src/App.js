@@ -48,6 +48,7 @@ class App extends Component {
       return;
     if (contacts.findIndex(contact => contact.name === name) !== -1) {
       this.setState({notify: true});
+      this.clearInputContactData();
       return;
     }
     const contactNew = {
